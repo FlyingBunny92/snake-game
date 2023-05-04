@@ -227,6 +227,10 @@ Snake.prototype.move = function () {
             return;
         }
     }
+    if(Math.floor(Math.random() * 13) % 7 == 0){
+        console.log("snake.swapBait();")
+        snake.swapBait();
+    }
 
     // If snake eats bait, create new bait, else continue the game
     if (newSnakeCell.x == snake.bait.x && newSnakeCell.y == snake.bait.y) {
@@ -249,6 +253,31 @@ Snake.prototype.move = function () {
 
     // Add new cell to head of the snake
     snake.snake.unshift(newSnakeCell);
+};
+
+/**
+ * Swap bait
+ */
+Snake.prototype.swapBait = function () {
+    let snake = this;
+    let bait = snake.createRandomInt();
+    let baitCoordinates, baitCell;
+    bait.x = snake.bait.x;
+    bait.y = snake.bait.y;
+
+    //Make first snake cell's elenment background color to black
+    baitCoordinates = "[data-x='" + bait.x + "'][data-y='" + bait.y + "']";
+    baitCell = document.querySelector(baitCoordinates);
+    if(Math.floor(Math.random() * 13) % 7 == 0){
+        baitCell.setAttribute('class', 'cell orange');
+    }else if(Math.floor(Math.random() * 13) % 9 == 0) {
+        baitCell.setAttribute('class', 'cell pink');
+    }else if(Math.floor(Math.random() * 13) % 5 == 0) {
+        baitCell.setAttribute('class', 'cell red');
+    }else if(Math.floor(Math.random() * 13) % 2 == 0) {
+        baitCell.setAttribute('class', 'cell black');
+    }
+
 };
 
 /**
